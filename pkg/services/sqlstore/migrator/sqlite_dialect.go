@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/grafana/grafana/pkg/util/errutil"
-	"github.com/mattn/go-sqlite3"
+	sqlite3 "modernc.org/sqlite"
 	"xorm.io/xorm"
 )
 
@@ -143,7 +143,7 @@ func (db *SQLite3) ErrorMessage(err error) string {
 }
 
 func (db *SQLite3) IsUniqueConstraintViolation(err error) bool {
-	return db.isThisError(err, int(sqlite3.ErrConstraintUnique))
+	return db.isThisError(err, int(sqlite3.SQLITE_CONSTRAINT_UNIQUE))
 }
 
 func (db *SQLite3) IsDeadlock(err error) bool {

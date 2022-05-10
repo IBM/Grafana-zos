@@ -71,7 +71,7 @@ require (
 	github.com/m3db/prometheus_remote_client_golang v0.4.4
 	github.com/magefile/mage v1.12.1
 	github.com/mattn/go-isatty v0.0.12
-	github.com/mattn/go-sqlite3 v1.14.7
+	github.com/mattn/go-sqlite3 v1.14.12
 	github.com/matttproud/golang_protobuf_extensions v1.0.2-0.20181231171920-c182affec369
 	github.com/mwitkow/go-conntrack v0.0.0-20190716064945-2f068394615f
 	github.com/ohler55/ojg v1.12.9
@@ -271,10 +271,23 @@ require (
 	github.com/getkin/kin-openapi v0.91.0 // indirect
 	github.com/ghodss/yaml v1.0.1-0.20190212211648-25d852aebe32 // indirect
 	github.com/imdario/mergo v0.3.12 // indirect
+	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/opencontainers/image-spec v1.0.2 // indirect
 	github.com/pierrec/lz4/v4 v4.1.8 // indirect
+	github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0 // indirect
 	github.com/segmentio/asm v1.1.1 // indirect
+	golang.org/x/mod v0.5.0 // indirect
+	lukechampine.com/uint128 v1.1.1 // indirect
+	modernc.org/cc/v3 v3.36.0 // indirect
+	modernc.org/ccgo/v3 v3.16.6 // indirect
+	modernc.org/libc v1.16.7 // indirect
+	modernc.org/mathutil v1.4.1 // indirect
+	modernc.org/memory v1.1.1 // indirect
+	modernc.org/opt v0.1.1 // indirect
+	modernc.org/sqlite v1.17.2 // indirect
+	modernc.org/strutil v1.1.1 // indirect
+	modernc.org/token v1.0.0 // indirect
 )
 
 // Use fork of crewjam/saml with fixes for some issues until changes get merged into upstream
@@ -287,3 +300,9 @@ replace github.com/hashicorp/consul => github.com/hashicorp/consul v1.10.2
 // TODO: remove once gocloud.dev releases 0.25.x
 // `fileblob` implementation has buggy key ordering in 0.24.0
 replace gocloud.dev v0.24.0 => github.com/google/go-cloud v0.24.1-0.20220209172924-99801bbb523a
+
+replace modernc.org/libc => /home/joonl/dev/libc
+
+replace modernc.org/memory => /home/joonl/dev/memory
+
+replace modernc.org/sqlite => /home/joonl/dev/sqlite

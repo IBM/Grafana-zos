@@ -14,7 +14,7 @@ import (
 	"github.com/grafana/grafana/pkg/infra/tracing"
 	"github.com/grafana/grafana/pkg/services/sqlstore/migrator"
 	"github.com/lib/pq"
-	"github.com/mattn/go-sqlite3"
+	sqlite3 "modernc.org/sqlite"
 	"github.com/prometheus/client_golang/prometheus"
 	cw "github.com/weaveworks/common/tracing"
 	"xorm.io/core"
@@ -40,7 +40,7 @@ func init() {
 // database queries. It also registers the metrics.
 func WrapDatabaseDriverWithHooks(dbType string, tracer tracing.Tracer) string {
 	drivers := map[string]driver.Driver{
-		migrator.SQLite:   &sqlite3.SQLiteDriver{},
+		migrator.SQLite:   &sqlite3.Driver{},
 		migrator.MySQL:    &mysql.MySQLDriver{},
 		migrator.Postgres: &pq.Driver{},
 	}
