@@ -7,6 +7,7 @@ import (
 
 	"github.com/grafana/grafana/pkg/util/errutil"
 	sqlite3 "modernc.org/sqlite"
+	sqliteLib "modernc.org/sqlite/lib"
 	"xorm.io/xorm"
 )
 
@@ -126,7 +127,7 @@ func (db *SQLite3) TruncateDBTables() error {
 func (db *SQLite3) isThisError(err error, errcode int) bool {
 	var driverErr sqlite3.Error
 	if errors.As(err, &driverErr) {
-		if int(driverErr.ExtendedCode) == errcode {
+		if int(driverErr.Code()) == errcode {
 			return true
 		}
 	}
@@ -143,7 +144,7 @@ func (db *SQLite3) ErrorMessage(err error) string {
 }
 
 func (db *SQLite3) IsUniqueConstraintViolation(err error) bool {
-	return db.isThisError(err, int(sqlite3.SQLITE_CONSTRAINT_UNIQUE))
+	return db.isThisError(err, int(sqliteLib.SQLITE_CONSTRAINT_UNIQUE))
 }
 
 func (db *SQLite3) IsDeadlock(err error) bool {
