@@ -328,7 +328,7 @@ replace gocloud.dev v0.24.0 => github.com/google/go-cloud v0.24.1-0.202202091729
 replace (
 	github.com/edsrzf/mmap-go => /home/joonl/dev/mmap-go
 	github.com/hashicorp/go-sockaddr => /home/joonl/dev/go-sockaddr
-	github.com/mattn/go-isatty => /home/joonl/go-work/src/github.com/mattn/go-isatty
+	// github.com/mattn/go-isatty => /home/joonl/go-work/src/github.com/mattn/go-isatty
 	github.com/prometheus/prometheus => /home/joonl/dev/prometheus
 	go.opentelemetry.io/otel/exporters/jaeger => /home/joonl/dev/jaeger
 	golang.org/x/sys/unix => /home/joonl/dev/sys/unix
