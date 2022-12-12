@@ -456,3 +456,9 @@ Grafana has been built on z/OS 2.4 and 2.5 using Go 1.19.3.
 7. Run `go mod tidy`
 
 8. Change directories into the Grafana repo and run `make build-go`
+
+9. If the build is successful, two binaries will be available in `bin/zos-s390x`:
+    - `grafana-server`
+    - `grafana-cli
+
+Run them at the root of the Grafana directory.
