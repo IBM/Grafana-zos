@@ -1,6 +1,6 @@
 # Grafana on z/OS
 
-This is a fork of Grafana version 8.4.4. The main difference of this port from the actual Grafana is its dependence on Sqlite. By default, Grafana uses Sqlite as its database. [Sqlite itself been documented to work on z/OS](https://sqlite.org/forum/forumpost/58540ce22dcd5fdcd), but the drivers required to make it work in Go programs use CGO callbacks. At the time of writing, Go on z/OS does not support CGO callbacks which is required in order to use the default Sqlite driver that Grafana uses.
+This is a WIP fork of Grafana version 8.4.4. **The binaries for the server and CLI build successfully but will fail when you try to run them.** The main difference of this port from the actual Grafana is its dependence on Sqlite. By default, Grafana uses Sqlite as its database. [Sqlite itself been documented to work on z/OS](https://sqlite.org/forum/forumpost/58540ce22dcd5fdcd), but the drivers required to make it work in Go programs use CGO callbacks. At the time of writing, Go on z/OS does not support CGO callbacks which is required in order to use the default Sqlite driver that Grafana uses.
 
 To get around this problem, this port of Grafana makes use of a [pure-Go implementation of Sqlite](https://gitlab.com/cznic/sqlite). However, it is not as straightforward as adding the package as a dependency. The pure-Go Sqlite package, as well as a few of it's dependencies also needs to be ported to z/OS. These dependencies include:
 - [a pure-Go implementation of libc](https://gitlab.com/cznic/libc)
@@ -40,17 +40,17 @@ Grafana has been built on z/OS 2.4 and 2.5 using Go 1.19.3.
     )
     ```
 
-3. Run `go mod install`.
+3. Run `go mod download`.
 
-4. Copy the following directories from `$GOMODCACHE` (e.g. `/home/joonl/go/pkg/mod`) to the directory containing Grafana, libc, sqlite, memory, and sys/unix:
-    - `cp /home/<user>/go/pkg/mod/github.com/edsrzf/mmap-go /path/containing/repos/mmap-go`
-    - `cp /home/<user>/go/pkg/mod/github.com/hashicorp/go-sockaddr /path/containing/repos/go-sockaddr`
-    - `cp /home/<user>/go/pkg/mod/github.com/prometheus/prometheus /path/containing/repos/prometheus`
-    - `cp /home/<user>/go/pkg/mod/go.opentelemetry.io/exporters/jaeger /path/containing/repos/jaeger`
+4. Copy the following directories from `$GOPATH/mod` (or `$HOME/go/mod` if `$GOPATH` is unset) to the directory containing Grafana, libc, sqlite, memory, and sys/unix:
+    - `cp $GOPATH/mod/github.com/edsrzf/mmap-go -r /path/containing/repos/mmap-go`
+    - `cp $GOPATH/mod/github.com/hashicorp/go-sockaddr -r /path/containing/repos/go-sockaddr`
+    - `cp $GOPATH/mod/github.com/prometheus/prometheus -r /path/containing/repos/prometheus`
+    - `cp $GOPATH/mod/go.opentelemetry.io/otel/exporters/jaeger -r /path/containing/repos/jaeger`
 
 5. Make the following changes:
     - For mmap-go:
-        - Edit the go.mod file and add a replace statement pointing to the sys/unix repo. E.g.:
+        - Edit the go.mod file and add a replace statement pointing to the sys/unix repo. If the file is not there create it. E.g.:
             ```go
             replace golang.org/x/sys => /home/joonl/dev/sys
             ```
@@ -437,7 +437,7 @@ Grafana has been built on z/OS 2.4 and 2.5 using Go 1.19.3.
             ```
     - For jaeger:
         - Add a `// +build !zos` build tag to `internal/third_party/thrift/lib/go/thrift/socket_unix_conn.go`
-        - Copy and rename `internal/third_party/thrift/lib/go/socket_windows_conn.go` to `internal/third_party/thrift/lib/go/socket_zos_conn.go`. Change the build tag to `// +build zos`
+        - Copy and rename `internal/third_party/thrift/lib/go/thrift/socket_windows_conn.go` to `internal/third_party/thrift/lib/go/socket_zos_conn.go`. Change the build tag to `// +build zos`
 
 6. Uncomment and edit the lines from step 2:
     ```go
