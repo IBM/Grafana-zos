@@ -459,6 +459,9 @@ Grafana has been built on z/OS 2.4 and 2.5 using Go 1.19.3.
 
 9. If the build is successful, two binaries will be available in `bin/zos-s390x`:
     - `grafana-server`
-    - `grafana-cli
+    - `grafana-cli`
 
-Run them at the root of the Grafana directory.
+Run them at the root of the Grafana directory:
+```
+./bin/zos-s390x/grafana-server
+```
