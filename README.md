@@ -1,6 +1,8 @@
 # Grafana on z/OS
 
-This is a WIP fork of Grafana version 8.4.4. **The binaries for the server and CLI build successfully but will fail when you try to run them.** The main difference of this port from the actual Grafana is its dependence on Sqlite. By default, Grafana uses Sqlite as its database. [Sqlite itself been documented to work on z/OS](https://sqlite.org/forum/forumpost/58540ce22dcd5fdcd), but the drivers required to make it work in Go programs use CGO callbacks. At the time of writing, Go on z/OS does not support CGO callbacks which is required in order to use the default Sqlite driver that Grafana uses.
+This is a WIP fork of Grafana version 8.4.4. **The binaries for the server and CLI build successfully but will ***fail*** when you try to run them.** The issue most likely lies with the implementation of Sqlite (see below) included in this port.
+
+The main difference of this port from the actual Grafana is its dependence on Sqlite. By default, Grafana uses Sqlite as its database. [Sqlite itself been documented to work on z/OS](https://sqlite.org/forum/forumpost/58540ce22dcd5fdcd), but the drivers required to make it work in Go programs use CGO callbacks. At the time of writing, Go on z/OS does not support CGO callbacks which is required in order to use the default Sqlite driver that Grafana uses.
 
 To get around this problem, this port of Grafana makes use of a [pure-Go implementation of Sqlite](https://gitlab.com/cznic/sqlite). However, it is not as straightforward as adding the package as a dependency. The pure-Go Sqlite package, as well as a few of it's dependencies also needs to be ported to z/OS. These dependencies include:
 - [a pure-Go implementation of libc](https://gitlab.com/cznic/libc)
@@ -450,3 +452,7 @@ Run them at the root of the Grafana directory:
 ```
 ./bin/zos-s390x/grafana-server
 ```
+
+## Next Steps
+
+Trying to run the `grafana-server` binary will result in a "out of memory" error. There are a few potential causes. One of them could be that the implementation of `memory` included is not sufficient enough to work with the port of `sqlite`. Another likely cause is that the `sqlite` implementation is flawed. There is a variable `ts1` in each os/arch implementation that contains an extremely long string. The implementation of `ts1` for z/OS is a copy of the linux/s390x version. It is very likely that this is contributing to the error and fixing it would require that the z/OS version be properly implemented.
