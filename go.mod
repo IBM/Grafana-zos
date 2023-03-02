@@ -254,7 +254,7 @@ require (
 	cloud.google.com/go/kms v1.1.0
 	github.com/golang-migrate/migrate/v4 v4.7.0
 	gocloud.dev v0.24.0
-	modernc.org/sqlite v1.17.2
+	modernc.org/sqlite v0.0.0-00010101000000-000000000000
 )
 
 require (
@@ -283,9 +283,7 @@ require (
 	lukechampine.com/uint128 v1.2.0 // indirect
 	modernc.org/cc/v3 v3.40.0 // indirect
 	modernc.org/ccgo/v3 v3.16.13 // indirect
-	modernc.org/libc v1.21.4 // indirect
 	modernc.org/mathutil v1.5.0 // indirect
-	modernc.org/memory v1.4.0 // indirect
 	modernc.org/opt v0.1.3 // indirect
 	modernc.org/strutil v1.1.3 // indirect
 	modernc.org/token v1.0.1 // indirect
@@ -312,6 +310,8 @@ require (
 	go.etcd.io/etcd/client/v3 v3.5.0 // indirect
 	go.uber.org/multierr v1.7.0 // indirect
 	go.uber.org/zap v1.19.1 // indirect
+	modernc.org/libc v1.21.4 // indirect
+	modernc.org/memory v1.4.0 // indirect
 )
 
 // Use fork of crewjam/saml with fixes for some issues until changes get merged into upstream
@@ -328,11 +328,9 @@ replace gocloud.dev v0.24.0 => github.com/google/go-cloud v0.24.1-0.202202091729
 replace (
 	github.com/edsrzf/mmap-go => /home/joonl/dev/mmap-go
 	github.com/hashicorp/go-sockaddr => /home/joonl/dev/go-sockaddr
-	// github.com/mattn/go-isatty => /home/joonl/go-work/src/github.com/mattn/go-isatty
 	github.com/prometheus/prometheus => /home/joonl/dev/prometheus
 	go.opentelemetry.io/otel/exporters/jaeger => /home/joonl/dev/jaeger
-	golang.org/x/sys/unix => /home/joonl/dev/sys/unix
-	modernc.org/libc => /home/joonl/dev/libc
-	modernc.org/memory => /home/joonl/dev/memory
-	modernc.org/sqlite => /home/joonl/dev/sqlite
+	modernc.org/libc => ./zos/libc
+	modernc.org/memory => ./zos/memory
+	modernc.org/sqlite => ./zos/sqlite
 )
