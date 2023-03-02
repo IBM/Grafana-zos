@@ -20,10 +20,10 @@ Grafana has been built on z/OS 2.4 and 2.5 using Go 1.19.3.
 2. Change directories so that you are in the directory containing Grafana. Edit `/path/to/grafana/go.mod`. Comment out lines 329 to 332:
     ```go
     replace (
-        // github.com/edsrzf/mmap-go => /home/joonl/dev/mmap-go
-        // github.com/hashicorp/go-sockaddr => /home/joonl/dev/go-sockaddr
-        // github.com/prometheus/prometheus => /home/joonl/dev/prometheus
-        // go.opentelemetry.io/otel/exporters/jaeger => /home/joonl/dev/jaeger
+        // github.com/edsrzf/mmap-go => /path/to/mmap-go
+        // github.com/hashicorp/go-sockaddr => /path/to/go-sockaddr
+        // github.com/prometheus/prometheus => /path/to/prometheus
+        // go.opentelemetry.io/otel/exporters/jaeger => /path/to/jaeger
         modernc.org/libc => ./zos/libc
         modernc.org/memory => ./zos/memory
         modernc.org/sqlite => ./zos/sqlite
@@ -428,10 +428,10 @@ Grafana has been built on z/OS 2.4 and 2.5 using Go 1.19.3.
 6. Uncomment and edit the lines from step 2:
     ```go
     replace (
-        github.com/edsrzf/mmap-go => /home/joonl/dev/mmap-go
-        github.com/hashicorp/go-sockaddr => /home/joonl/dev/go-sockaddr
-        github.com/prometheus/prometheus => /home/joonl/dev/prometheus
-        go.opentelemetry.io/otel/exporters/jaeger => /home/joonl/dev/jaeger
+        github.com/edsrzf/mmap-go => /path/to/mmap-go
+        github.com/hashicorp/go-sockaddr => /path/to/go-sockaddr
+        github.com/prometheus/prometheus => /path/to/prometheus
+        go.opentelemetry.io/otel/exporters/jaeger => /path/to/jaeger
         modernc.org/libc => ./zos/libc
         modernc.org/memory => ./zos/memory
         modernc.org/sqlite => ./zos/sqlite
